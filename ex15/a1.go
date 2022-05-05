@@ -11,20 +11,53 @@ func main() {
 }
 
 func threeSum(nums []int) [][]int {
-    var list = list.New();
+    var resList = list.New();
     for i := 0; i < len(nums) - 2; i++ {
         for j := i + 1; j < len(nums) - 1; j++ {
             for k := j + 1; k < len(nums); k++ {
-                if nums[i] + nums[j] + nums[k] == 0 {
-                    list.Add([]int{nums[i], nums[j], nums[k]})
+                if nums[i] + nums[j] + nums[k] == 0 {    
+                    var element = []int{nums[i], nums[j], nums[k]}   
+                    if !isResListContained(resList, element) {          
+                        resList.Add(element)
+                    }
                 }
             }
         }
     }
 
-    result := make([][]int, list.Size())
-    for i := 0; i < list.Size(); i++ {
-        result[i] = list.Get(i).([]int)
+    result := make([][]int, resList.Size())
+    for i := 0; i < resList.Size(); i++ {
+        result[i] = resList.Get(i).([]int)
     }
     return result;
+}
+
+func isResListContained(resList *list, elements []int) bool {
+    flagRes := make([]bool, resList.Size())
+    flagElems := make([]bool, len(elements))
+
+    for i < resList.Size() {
+        resElements = resList.Get(i).([]int)
+        
+        for j < len(resElements) {
+            for k < len(elements) {
+                if resElements[j] == elements[k] && !flagElems[k] {
+                    flagRes[j] = true
+                    flagElems[k] = true
+                }                    
+            }
+        }
+    }    
+
+    var result = true
+
+    for _, v := range flagRes {
+        result = result && v
+    }
+
+    for _, v := range flagElems {
+        result = result && v
+    }
+        
+    return result
 }
